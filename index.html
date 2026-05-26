@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mara Voss — Artist Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@200;300;400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --clay:    #c4956a;
+    --sand:    #e8dcc8;
+    --parch:   #f2ead8;
+    --umber:   #6b4c2a;
+    --bark:    #3e2b1a;
+    --ash:     #d4c9b0;
+    --smoke:   #b0a48e;
+    --ink:     #2a1e10;
+    --cream:   #faf6ee;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    background: var(--cream);
+    color: var(--ink);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem 2.5rem;
+    mix-blend-mode: multiply;
+    transition: background 0.4s;
+  }
+  nav.scrolled {
+    background: rgba(42,30,16,0.92);
+    mix-blend-mode: normal;
+    backdrop-filter: blur(6px);
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.35rem;
+    font-weight: 300;
+    letter-spacing: 0.12em;
+    color: #fff;
+    text-decoration: none;
+  }
+  .nav-links {
+    display: flex;
+    gap: 2.2rem;
+    list-style: none;
+  }
+  .nav-links a {
+    font-size: 0.7rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.85);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--clay); }
+
+  /* hamburger */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 4px;
+  }
+  .hamburger span {
+    display: block;
+    width: 24px; height: 1.5px;
+    background: #fff;
+    transition: transform 0.3s, opacity 0.3s;
+  }
+  .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(42,30,16,0.97);
+    z-index: 90;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2.5rem;
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    font-style: italic;
+    color: var(--sand);
+    text-decoration: none;
+    letter-spacing: 0.06em;
+  }
+
+  /* ── HERO ── */
+  #home {
+    position: relative;
+    height: 100vh;
+    min-height: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute;
+    inset: -20%;
+    background: url('https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?w=1600&auto=format&fit=crop&q=80') center/cover no-repeat;
+    will-change: transform;
+    filter: sepia(60%) brightness(0.72);
+  }
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom,
+      rgba(42,20,8,0.15) 0%,
+      rgba(42,20,8,0.45) 60%,
+      rgba(42,20,8,0.75) 100%);
+  }
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 2rem;
+    max-width: 780px;
+  }
+  .hero-eyebrow {
+    font-size: 0.65rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--clay);
+    margin-bottom: 1.4rem;
+  }
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 8vw, 6.5rem);
+    font-weight: 300;
+    line-height: 1.0;
+    color: #fff;
+    margin-bottom: 1.8rem;
+    letter-spacing: 0.02em;
+  }
+  .hero-title em { font-style: italic; color: var(--sand); }
+  .hero-text {
+    font-size: clamp(0.85rem, 1.5vw, 1rem);
+    line-height: 1.9;
+    color: rgba(255,255,255,0.78);
+    max-width: 520px;
+    margin: 0 auto 2.4rem;
+    letter-spacing: 0.04em;
+  }
+  .hero-scroll-hint {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.6rem;
+    color: rgba(255,255,255,0.45);
+    font-size: 0.6rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    animation: nudge 2.4s ease-in-out infinite;
+  }
+  .hero-scroll-hint svg { width: 18px; opacity: 0.5; }
+  @keyframes nudge {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(6px); }
+  }
+
+  /* ── SECTION SHELL ── */
+  .portfolio-section {
+    position: relative;
+    padding: 7rem 0 5rem;
+    overflow: hidden;
+  }
+  .portfolio-section:nth-child(odd) { background: var(--parch); }
+  .portfolio-section:nth-child(even) { background: var(--sand); }
+
+  .section-parallax-bg {
+    position: absolute;
+    inset: -30% 0;
+    opacity: 0.06;
+    will-change: transform;
+    pointer-events: none;
+  }
+  .section-parallax-bg svg { width: 100%; height: 100%; }
+
+  .section-inner {
+    position: relative;
+    z-index: 2;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  /* section header */
+  .section-header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    margin-bottom: 3.5rem;
+    gap: 1rem;
+  }
+  .section-number {
+    font-size: 0.6rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--clay);
+    margin-bottom: 0.6rem;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 300;
+    color: var(--bark);
+    line-height: 1.1;
+  }
+  .section-title em { font-style: italic; }
+  .section-desc {
+    font-size: 0.82rem;
+    line-height: 1.85;
+    color: var(--umber);
+    max-width: 340px;
+    letter-spacing: 0.03em;
+    text-align: right;
+  }
+
+  /* ── DIVIDER ── */
+  .divider {
+    width: 48px;
+    height: 1px;
+    background: var(--clay);
+    margin: 0.8rem 0 1.4rem;
+    opacity: 0.6;
+  }
+
+  /* ── GALLERY GRIDS ── */
+
+  /* Section 1 — large feature + column */
+  .gallery-1 {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr;
+    grid-template-rows: auto auto;
+    gap: 1rem;
+  }
+  .gallery-1 .g-tall { grid-row: 1 / 3; }
+
+  /* Section 2 — horizontal strip + two-col */
+  .gallery-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 260px 200px;
+    gap: 1rem;
+  }
+  .gallery-2 .g-wide { grid-column: 1 / 3; }
+
+  /* Section 3 — mosaic */
+  .gallery-3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 220px 220px;
+    gap: 1rem;
+  }
+  .gallery-3 .g-sq2 { grid-column: 2 / 4; grid-row: 1 / 3; }
+
+  /* shared image card */
+  .img-card {
+    position: relative;
+    overflow: hidden;
+    background: var(--ash);
+    cursor: pointer;
+  }
+  .img-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(42,20,8,0);
+    transition: background 0.45s ease;
+  }
+  .img-card:hover::after { background: rgba(42,20,8,0.22); }
+  .img-card img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+    filter: sepia(20%) saturate(0.85);
+    transition: transform 0.6s ease, filter 0.45s ease;
+  }
+  .img-card:hover img {
+    transform: scale(1.04);
+    filter: sepia(10%) saturate(1.0);
+  }
+  .img-card .caption {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 1.2rem;
+    background: linear-gradient(transparent, rgba(42,20,8,0.7));
+    transform: translateY(100%);
+    transition: transform 0.4s ease;
+    z-index: 2;
+  }
+  .img-card:hover .caption { transform: translateY(0); }
+  .caption-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    font-style: italic;
+    color: #fff;
+    letter-spacing: 0.04em;
+  }
+  .caption-meta {
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.65);
+    margin-top: 0.2rem;
+  }
+
+  /* placeholder colors for no-image state */
+  .ph-1 { background: #c9b89a; }
+  .ph-2 { background: #b8a882; }
+  .ph-3 { background: #a8977a; }
+  .ph-4 { background: #d4c4a8; }
+  .ph-5 { background: #be9e72; }
+  .ph-6 { background: #c8b490; }
+  .ph-7 { background: #b09070; }
+  .ph-8 { background: #d8c8b0; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--bark);
+    color: var(--ash);
+    padding: 4rem 2rem 3rem;
+    text-align: center;
+  }
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    font-style: italic;
+    font-weight: 300;
+    color: var(--sand);
+    margin-bottom: 1rem;
+    letter-spacing: 0.08em;
+  }
+  footer p {
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    color: var(--smoke);
+    text-transform: uppercase;
+    margin-bottom: 2.5rem;
+  }
+  .footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    list-style: none;
+    flex-wrap: wrap;
+  }
+  .footer-links a {
+    font-size: 0.65rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--smoke);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--clay); }
+  .footer-copy {
+    margin-top: 3rem;
+    font-size: 0.62rem;
+    letter-spacing: 0.12em;
+    color: rgba(176,164,142,0.45);
+    text-transform: uppercase;
+  }
+
+  /* ── REVEAL ANIMATION ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.22s; }
+  .reveal-delay-3 { transition-delay: 0.34s; }
+  .reveal-delay-4 { transition-delay: 0.46s; }
+
+  /* ── MOBILE ── */
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.4rem; }
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+
+    .hero-title { font-size: clamp(2.6rem, 12vw, 4rem); }
+    .hero-text { font-size: 0.82rem; }
+
+    .portfolio-section { padding: 4.5rem 0 3.5rem; }
+
+    .section-header {
+      grid-template-columns: 1fr;
+    }
+    .section-desc { text-align: left; max-width: 100%; }
+
+    .gallery-1 {
+      grid-template-columns: 1fr;
+      grid-template-rows: 260px 200px 200px;
+    }
+    .gallery-1 .g-tall { grid-row: auto; }
+
+    .gallery-2 {
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 200px 200px 180px;
+    }
+    .gallery-2 .g-wide { grid-column: 1 / 3; }
+
+    .gallery-3 {
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 200px 200px 200px;
+    }
+    .gallery-3 .g-sq2 {
+      grid-column: 1 / 3;
+      grid-row: auto;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .gallery-2 {
+      grid-template-columns: 1fr;
+      grid-template-rows: repeat(3, 200px);
+    }
+    .gallery-2 .g-wide { grid-column: 1; }
+    .gallery-3 {
+      grid-template-columns: 1fr;
+      grid-template-rows: repeat(3, 200px);
+    }
+    .gallery-3 .g-sq2 { grid-column: 1; grid-row: auto; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="main-nav">
+  <a href="#home" class="nav-logo">Mara Voss</a>
+  <ul class="nav-links">
+    <li><a href="#landscapes">Landscapes</a></li>
+    <li><a href="#portraits">Portraits</a></li>
+    <li><a href="#still-life">Still Life</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#landscapes" onclick="toggleMenu()">Landscapes</a>
+  <a href="#portraits" onclick="toggleMenu()">Portraits</a>
+  <a href="#still-life" onclick="toggleMenu()">Still Life</a>
+  <a href="#contact" onclick="toggleMenu()">Contact</a>
+</div>
+
+<!-- HERO -->
+<section id="home">
+  <div class="hero-bg" id="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Fine Art Photography &amp; Mixed Media</p>
+    <h1 class="hero-title">Mara <em>Voss</em></h1>
+    <p class="hero-text">
+      I work in the space between memory and material — collecting light, texture, and
+      time into images that ask to be held rather than scrolled past. Each series is a
+      slow conversation with a place, a person, or an ordinary object made strange by
+      sustained attention.
+    </p>
+    <div class="hero-scroll-hint">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M12 5v14M5 12l7 7 7-7"/>
+      </svg>
+      <span>Explore</span>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 1: LANDSCAPES -->
+<section class="portfolio-section" id="landscapes">
+  <div class="section-inner">
+    <div class="section-header">
+      <div>
+        <p class="section-number">01 / Landscapes</p>
+        <div class="divider"></div>
+        <h2 class="section-title">The <em>Quiet</em> Earth</h2>
+      </div>
+      <p class="section-desc">
+        Expansive terrain captured at the edge of day — dusk light flattening colour
+        into something ancient, almost geological.
+      </p>
+    </div>
+
+    <div class="gallery-1">
+      <div class="img-card g-tall reveal reveal-delay-1" style="min-height:460px;">
+        <img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=800&auto=format&fit=crop&q=75" alt="Wide landscape at dusk">
+        <div class="caption">
+          <p class="caption-title">Ochre Flats, August</p>
+          <p class="caption-meta">Archival pigment — 90 × 120 cm</p>
+        </div>
+      </div>
+      <div class="img-card reveal reveal-delay-2" style="min-height:220px;">
+        <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=700&auto=format&fit=crop&q=75" alt="Mountain silhouette">
+        <div class="caption">
+          <p class="caption-title">Ridge, Pre-dawn</p>
+          <p class="caption-meta">Archival pigment — 60 × 80 cm</p>
+        </div>
+      </div>
+      <div class="img-card reveal reveal-delay-3" style="min-height:220px;">
+        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=700&auto=format&fit=crop&q=75" alt="Desert plains">
+        <div class="caption">
+          <p class="caption-title">Salt Plain, Noon</p>
+          <p class="caption-meta">Archival pigment — 60 × 80 cm</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 2: PORTRAITS -->
+<section class="portfolio-section" id="portraits">
+  <div class="section-inner">
+    <div class="section-header">
+      <div>
+        <p class="section-number">02 / Portraits</p>
+        <div class="divider"></div>
+        <h2 class="section-title"><em>Presence</em> &amp; Grain</h2>
+      </div>
+      <p class="section-desc">
+        Shot on medium format film. Faces rendered at the threshold of
+        recognition — familiar and withheld at once.
+      </p>
+    </div>
+
+    <div class="gallery-2">
+      <div class="img-card g-wide reveal reveal-delay-1">
+        <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=1000&auto=format&fit=crop&q=75" alt="Portrait study wide">
+        <div class="caption">
+          <p class="caption-title">Study in Sienna, No. 4</p>
+          <p class="caption-meta">Silver gelatin — 80 × 60 cm</p>
+        </div>
+      </div>
+      <div class="img-card reveal reveal-delay-2">
+        <img src="https://images.unsplash.com/photo-1601455763557-db1bea8a9a5a?w=500&auto=format&fit=crop&q=75" alt="Close portrait">
+        <div class="caption">
+          <p class="caption-title">Elena</p>
+          <p class="caption-meta">Silver gelatin — 40 × 50 cm</p>
+        </div>
+      </div>
+      <div class="img-card reveal reveal-delay-2" style="grid-column:1; grid-row:2;">
+        <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=500&auto=format&fit=crop&q=75" alt="Male portrait">
+        <div class="caption">
+          <p class="caption-title">The Cartographer</p>
+          <p class="caption-meta">Silver gelatin — 40 × 50 cm</p>
+        </div>
+      </div>
+      <div class="img-card reveal reveal-delay-3">
+        <img src="https://images.unsplash.com/photo-1502685104226-ee32379fefbe?w=500&auto=format&fit=crop&q=75" alt="Portrait with fabric">
+        <div class="caption">
+          <p class="caption-title">Linen, Afternoon</p>
+          <p class="caption-meta">Silver gelatin — 40 × 50 cm</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 3: STILL LIFE -->
+<section class="portfolio-section" id="still-life">
+  <div class="section-inner">
+    <div class="section-header">
+      <div>
+        <p class="section-number">03 / Still Life</p>
+        <div class="divider"></div>
+        <h2 class="section-title">Objects <em>at Rest</em></h2>
+      </div>
+      <p class="section-desc">
+        Gathered from flea markets, shorelines, and kitchen tables — each object
+        carrying a weight beyond its use.
+      </p>
+    </div>
+
+    <div class="gallery-3">
+      <div class="img-card reveal reveal-delay-1" style="min-height:220px;">
+        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=500&auto=format&fit=crop&q=75" alt="Ceramics still life">
+        <div class="caption">
+          <p class="caption-title">Three Vessels</p>
+          <p class="caption-meta">Archival pigment — 50 × 50 cm</p>
+        </div>
+      </div>
+      <div class="img-card g-sq2 reveal reveal-delay-2">
+        <img src="https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=800&auto=format&fit=crop&q=75" alt="Table composition large">
+        <div class="caption">
+          <p class="caption-title">Table with Cloth and Pears</p>
+          <p class="caption-meta">Archival pigment — 100 × 80 cm</p>
+        </div>
+      </div>
+      <div class="img-card reveal reveal-delay-3" style="min-height:220px;">
+        <img src="https://images.unsplash.com/photo-1540932239986-30128078f3c5?w=500&auto=format&fit=crop&q=75" alt="Dried flowers still life">
+        <div class="caption">
+          <p class="caption-title">Dried, December</p>
+          <p class="caption-meta">Archival pigment — 50 × 70 cm</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER / CONTACT -->
+<footer id="contact">
+  <p class="footer-logo">Mara Voss</p>
+  <p>Available for commissions, exhibitions &amp; editorial work</p>
+  <ul class="footer-links">
+    <li><a href="#">Instagram</a></li>
+    <li><a href="#">Email</a></li>
+    <li><a href="#">Press</a></li>
+    <li><a href="#">Shop Prints</a></li>
+  </ul>
+  <p class="footer-copy">&copy; 2026 Mara Voss. All rights reserved.</p>
+</footer>
+
+<script>
+  /* ── NAV scroll ── */
+  const nav = document.getElementById('main-nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  }, { passive: true });
+
+  /* ── Mobile menu ── */
+  function toggleMenu() {
+    const m = document.getElementById('mobile-menu');
+    const h = document.getElementById('hamburger');
+    m.classList.toggle('open');
+    h.classList.toggle('open');
+  }
+
+  /* ── Hero parallax ── */
+  const heroBg = document.getElementById('hero-bg');
+  function onScroll() {
+    const sy = window.scrollY;
+    if (sy < window.innerHeight * 1.2) {
+      heroBg.style.transform = `translateY(${sy * 0.35}px)`;
+    }
+
+    /* section bg parallax */
+    parallaxBgs.forEach(({ el, speed }) => {
+      const rect = el.parentElement.getBoundingClientRect();
+      const mid = rect.top + rect.height / 2 - window.innerHeight / 2;
+      el.style.transform = `translateY(${mid * speed}px)`;
+    });
+  }
+
+  /* ── Section parallax decorators ── */
+  const parallaxBgs = [];
+  document.querySelectorAll('.section-parallax-bg').forEach(el => {
+    parallaxBgs.push({ el, speed: 0.08 });
+  });
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  /* ── Reveal on scroll ── */
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(r => observer.observe(r));
+</script>
+</body>
+</html>
