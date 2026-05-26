@@ -3,35 +3,31 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mara Voss — Artist Portfolio</title>
-<!-- ─────────────────────────────────────────
-     SANITY CONFIG — swap these two values in
-     once your project is set up
-───────────────────────────────────────────── -->
+<title>Katherine LeBlanc — Artist Portfolio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@200;300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Raleway:wght@200;300;400&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --clay:    #c4956a;
-    --sand:    #e8dcc8;
-    --parch:   #f2ead8;
-    --umber:   #6b4c2a;
-    --bark:    #3e2b1a;
-    --ash:     #d4c9b0;
-    --smoke:   #b0a48e;
-    --ink:     #2a1e10;
-    --cream:   #faf6ee;
+    --slate:   #2c3a47;
+    --mist:    #e8edf2;
+    --fog:     #f4f6f8;
+    --steel:   #7a8fa6;
+    --iron:    #4a5c6e;
+    --deep:    #1a2530;
+    --silver:  #b8c6d4;
+    --gold:    #c9a84c;
+    --white:   #fdfeff;
   }
 
   html { scroll-behavior: smooth; }
 
   body {
-    font-family: 'Jost', sans-serif;
+    font-family: 'Raleway', sans-serif;
     font-weight: 300;
-    background: var(--cream);
-    color: var(--ink);
+    background: var(--white);
+    color: var(--deep);
     overflow-x: hidden;
   }
 
@@ -43,85 +39,84 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1.25rem 2.5rem;
-    mix-blend-mode: multiply;
-    transition: background 0.4s;
+    padding: 1.4rem 3rem;
+    transition: background 0.4s, padding 0.4s;
   }
   nav.scrolled {
-    background: rgba(42,30,16,0.92);
-    mix-blend-mode: normal;
-    backdrop-filter: blur(6px);
+    background: rgba(26,37,48,0.95);
+    backdrop-filter: blur(8px);
+    padding: 1rem 3rem;
   }
   .nav-logo {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.35rem;
-    font-weight: 300;
-    letter-spacing: 0.12em;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-weight: 400;
+    letter-spacing: 0.08em;
     color: #fff;
     text-decoration: none;
   }
   .nav-links {
     display: flex;
-    gap: 2.2rem;
+    gap: 2.5rem;
     list-style: none;
   }
   .nav-links a {
-    font-size: 0.7rem;
-    letter-spacing: 0.22em;
+    font-size: 0.65rem;
+    letter-spacing: 0.28em;
     text-transform: uppercase;
-    color: rgba(255,255,255,0.85);
+    color: rgba(255,255,255,0.75);
     text-decoration: none;
     transition: color 0.2s;
   }
-  .nav-links a:hover { color: var(--clay); }
+  .nav-links a:hover { color: var(--gold); }
 
-  /* hamburger */
   .hamburger {
     display: none;
     flex-direction: column;
     gap: 5px;
     cursor: pointer;
-    padding: 4px;
   }
   .hamburger span {
     display: block;
-    width: 24px; height: 1.5px;
+    width: 26px; height: 1px;
     background: #fff;
     transition: transform 0.3s, opacity 0.3s;
   }
-  .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+  .hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
   .hamburger.open span:nth-child(2) { opacity: 0; }
-  .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+  .hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
 
   .mobile-menu {
     display: none;
     position: fixed;
     inset: 0;
-    background: rgba(42,30,16,0.97);
+    background: rgba(26,37,48,0.98);
     z-index: 90;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 2.5rem;
+    gap: 2.8rem;
   }
   .mobile-menu.open { display: flex; }
   .mobile-menu a {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 2rem;
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
     font-style: italic;
-    color: var(--sand);
+    color: var(--mist);
     text-decoration: none;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.04em;
+    transition: color 0.2s;
   }
+  .mobile-menu a:hover { color: var(--gold); }
 
   /* ── HERO ── */
   #home {
     position: relative;
     height: 100vh;
-    min-height: 600px;
+    min-height: 620px;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    align-items: flex-end;
+    justify-content: flex-start;
     overflow: hidden;
   }
   .hero-bg {
@@ -129,333 +124,331 @@
     inset: -20%;
     background: url('https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?w=1600&auto=format&fit=crop&q=80') center/cover no-repeat;
     will-change: transform;
-    filter: sepia(60%) brightness(0.72);
+    filter: brightness(0.55) saturate(0.7);
   }
   .hero-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(to bottom,
-      rgba(42,20,8,0.15) 0%,
-      rgba(42,20,8,0.45) 60%,
-      rgba(42,20,8,0.75) 100%);
+    background: linear-gradient(120deg,
+      rgba(26,37,48,0.85) 0%,
+      rgba(26,37,48,0.3) 60%,
+      rgba(26,37,48,0.1) 100%);
   }
   .hero-content {
     position: relative;
     z-index: 2;
-    text-align: center;
-    padding: 2rem;
-    max-width: 780px;
+    padding: 0 3rem 5rem;
+    max-width: 720px;
   }
   .hero-eyebrow {
-    font-size: 0.65rem;
-    letter-spacing: 0.35em;
+    font-size: 0.62rem;
+    letter-spacing: 0.38em;
     text-transform: uppercase;
-    color: var(--clay);
-    margin-bottom: 1.4rem;
+    color: var(--gold);
+    margin-bottom: 1.2rem;
+    opacity: 0;
+    animation: fadeUp 0.9s 0.3s forwards;
   }
   .hero-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(3rem, 8vw, 6.5rem);
-    font-weight: 300;
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3.2rem, 8vw, 6rem);
+    font-weight: 700;
     line-height: 1.0;
     color: #fff;
-    margin-bottom: 1.8rem;
-    letter-spacing: 0.02em;
+    margin-bottom: 1.6rem;
+    letter-spacing: 0.01em;
+    opacity: 0;
+    animation: fadeUp 0.9s 0.5s forwards;
   }
-  .hero-title em { font-style: italic; color: var(--sand); }
+  .hero-title em { font-style: italic; font-weight: 400; color: var(--silver); }
   .hero-text {
-    font-size: clamp(0.85rem, 1.5vw, 1rem);
-    line-height: 1.9;
-    color: rgba(255,255,255,0.78);
-    max-width: 520px;
-    margin: 0 auto 2.4rem;
+    font-size: clamp(0.82rem, 1.4vw, 0.96rem);
+    line-height: 2.0;
+    color: rgba(255,255,255,0.7);
+    max-width: 480px;
     letter-spacing: 0.04em;
+    opacity: 0;
+    animation: fadeUp 0.9s 0.7s forwards;
   }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(22px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
   .hero-scroll-hint {
+    position: absolute;
+    bottom: 2rem;
+    right: 3rem;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.6rem;
-    color: rgba(255,255,255,0.45);
-    font-size: 0.6rem;
-    letter-spacing: 0.25em;
+    gap: 0.5rem;
+    color: rgba(255,255,255,0.35);
+    font-size: 0.58rem;
+    letter-spacing: 0.28em;
     text-transform: uppercase;
-    animation: nudge 2.4s ease-in-out infinite;
+    animation: nudge 2.6s ease-in-out infinite;
   }
-  .hero-scroll-hint svg { width: 18px; opacity: 0.5; }
+  .hero-scroll-hint svg { width: 16px; opacity: 0.4; }
   @keyframes nudge {
     0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(6px); }
+    50% { transform: translateY(7px); }
   }
 
   /* ── SECTION SHELL ── */
   .portfolio-section {
-    position: relative;
     padding: 7rem 0 5rem;
-    overflow: hidden;
   }
-  .portfolio-section:nth-child(odd) { background: var(--parch); }
-  .portfolio-section:nth-child(even) { background: var(--sand); }
-
-  .section-parallax-bg {
-    position: absolute;
-    inset: -30% 0;
-    opacity: 0.06;
-    will-change: transform;
-    pointer-events: none;
-  }
-  .section-parallax-bg svg { width: 100%; height: 100%; }
+  .portfolio-section:nth-child(odd)  { background: var(--fog); }
+  .portfolio-section:nth-child(even) { background: var(--mist); }
 
   .section-inner {
-    position: relative;
-    z-index: 2;
-    max-width: 1200px;
+    max-width: 1240px;
     margin: 0 auto;
-    padding: 0 2rem;
+    padding: 0 2.5rem;
   }
 
-  /* section header */
   .section-header {
     display: grid;
-    grid-template-columns: 1fr auto;
+    grid-template-columns: 1fr 1fr;
     align-items: end;
     margin-bottom: 3.5rem;
-    gap: 1rem;
+    gap: 2rem;
+    border-bottom: 1px solid var(--silver);
+    padding-bottom: 2rem;
   }
   .section-number {
-    font-size: 0.6rem;
-    letter-spacing: 0.3em;
+    font-size: 0.58rem;
+    letter-spacing: 0.35em;
     text-transform: uppercase;
-    color: var(--clay);
-    margin-bottom: 0.6rem;
+    color: var(--gold);
+    margin-bottom: 0.8rem;
   }
   .section-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(2rem, 4vw, 3.2rem);
-    font-weight: 300;
-    color: var(--bark);
-    line-height: 1.1;
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 400;
+    color: var(--slate);
+    line-height: 1.15;
   }
-  .section-title em { font-style: italic; }
+  .section-title em { font-style: italic; color: var(--iron); }
   .section-desc {
-    font-size: 0.82rem;
-    line-height: 1.85;
-    color: var(--umber);
-    max-width: 340px;
+    font-size: 0.8rem;
+    line-height: 1.95;
+    color: var(--steel);
     letter-spacing: 0.03em;
-    text-align: right;
   }
 
-  /* ── DIVIDER ── */
-  .divider {
-    width: 48px;
-    height: 1px;
-    background: var(--clay);
-    margin: 0.8rem 0 1.4rem;
-    opacity: 0.6;
-  }
+  /* ── DYNAMIC GALLERY ── */
+  /*
+    Layout changes automatically based on image count.
+    1 image  → full width
+    2 images → 50/50 split
+    3 images → one tall left + two stacked right
+    4 images → 2×2 grid
+    5+ images → masonry-style auto grid
+  */
 
-  /* ── GALLERY GRIDS ── */
-
-  /* Section 1 — large feature + column */
-  .gallery-1 {
+  .gallery {
     display: grid;
-    grid-template-columns: 1.6fr 1fr;
-    grid-template-rows: auto auto;
-    gap: 1rem;
+    gap: 0.8rem;
   }
-  .gallery-1 .g-tall { grid-row: 1 / 3; }
 
-  /* Section 2 — horizontal strip + two-col */
-  .gallery-2 {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 260px 200px;
-    gap: 1rem;
+  /* 1 image */
+  .gallery.count-1 {
+    grid-template-columns: 1fr;
   }
-  .gallery-2 .g-wide { grid-column: 1 / 3; }
+  .gallery.count-1 .img-card { min-height: 500px; }
 
-  /* Section 3 — mosaic */
-  .gallery-3 {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 220px 220px;
-    gap: 1rem;
+  /* 2 images */
+  .gallery.count-2 {
+    grid-template-columns: 1fr 1fr;
   }
-  .gallery-3 .g-sq2 { grid-column: 2 / 4; grid-row: 1 / 3; }
+  .gallery.count-2 .img-card { min-height: 380px; }
+
+  /* 3 images — first card spans 2 rows */
+  .gallery.count-3 {
+    grid-template-columns: 1.5fr 1fr;
+    grid-template-rows: 260px 260px;
+  }
+  .gallery.count-3 .img-card:first-child {
+    grid-row: 1 / 3;
+  }
+  .gallery.count-3 .img-card { min-height: 0; }
+
+  /* 4 images — 2×2 */
+  .gallery.count-4 {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 280px 280px;
+  }
+
+  /* 5 images — wide first + 2×2 */
+  .gallery.count-5 {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 300px 220px 220px;
+  }
+  .gallery.count-5 .img-card:first-child {
+    grid-column: 1 / 3;
+  }
+
+  /* 6+ images — 3-col auto */
+  .gallery.count-6,
+  .gallery.count-many {
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: 260px;
+  }
 
   /* shared image card */
   .img-card {
     position: relative;
     overflow: hidden;
-    background: var(--ash);
+    background: var(--silver);
     cursor: pointer;
   }
   .img-card::after {
     content: '';
     position: absolute;
     inset: 0;
-    background: rgba(42,20,8,0);
-    transition: background 0.45s ease;
+    background: rgba(26,37,48,0);
+    transition: background 0.4s;
   }
-  .img-card:hover::after { background: rgba(42,20,8,0.22); }
+  .img-card:hover::after { background: rgba(26,37,48,0.28); }
   .img-card img {
     width: 100%; height: 100%;
     object-fit: cover;
     display: block;
-    filter: sepia(20%) saturate(0.85);
-    transition: transform 0.6s ease, filter 0.45s ease;
+    transition: transform 0.65s ease;
   }
-  .img-card:hover img {
-    transform: scale(1.04);
-    filter: sepia(10%) saturate(1.0);
-  }
+  .img-card:hover img { transform: scale(1.05); }
+
   .img-card .caption {
     position: absolute;
     bottom: 0; left: 0; right: 0;
-    padding: 1.2rem;
-    background: linear-gradient(transparent, rgba(42,20,8,0.7));
+    padding: 1.4rem;
+    background: linear-gradient(transparent, rgba(26,37,48,0.75));
     transform: translateY(100%);
     transition: transform 0.4s ease;
     z-index: 2;
   }
   .img-card:hover .caption { transform: translateY(0); }
   .caption-title {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: 'Playfair Display', serif;
     font-size: 1rem;
     font-style: italic;
     color: #fff;
-    letter-spacing: 0.04em;
+    letter-spacing: 0.03em;
   }
   .caption-meta {
-    font-size: 0.6rem;
-    letter-spacing: 0.2em;
+    font-size: 0.58rem;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: rgba(255,255,255,0.65);
-    margin-top: 0.2rem;
+    color: rgba(255,255,255,0.6);
+    margin-top: 0.25rem;
   }
 
-  /* placeholder colors for no-image state */
-  .ph-1 { background: #c9b89a; }
-  .ph-2 { background: #b8a882; }
-  .ph-3 { background: #a8977a; }
-  .ph-4 { background: #d4c4a8; }
-  .ph-5 { background: #be9e72; }
-  .ph-6 { background: #c8b490; }
-  .ph-7 { background: #b09070; }
-  .ph-8 { background: #d8c8b0; }
+  /* placeholder color blocks for empty gallery state */
+  .img-card.placeholder { background: var(--silver); opacity: 0.4; }
 
   /* ── FOOTER ── */
   footer {
-    background: var(--bark);
-    color: var(--ash);
-    padding: 4rem 2rem 3rem;
+    background: var(--deep);
+    color: var(--silver);
+    padding: 5rem 2.5rem 3.5rem;
     text-align: center;
   }
   .footer-logo {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.8rem;
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
     font-style: italic;
-    font-weight: 300;
-    color: var(--sand);
-    margin-bottom: 1rem;
-    letter-spacing: 0.08em;
+    font-weight: 400;
+    color: #fff;
+    margin-bottom: 0.8rem;
+    letter-spacing: 0.06em;
   }
-  footer p {
-    font-size: 0.72rem;
-    letter-spacing: 0.18em;
-    color: var(--smoke);
+  .footer-tagline {
+    font-size: 0.68rem;
+    letter-spacing: 0.22em;
+    color: var(--steel);
     text-transform: uppercase;
-    margin-bottom: 2.5rem;
+    margin-bottom: 3rem;
   }
   .footer-links {
     display: flex;
     justify-content: center;
-    gap: 2rem;
+    gap: 2.5rem;
     list-style: none;
     flex-wrap: wrap;
   }
   .footer-links a {
-    font-size: 0.65rem;
-    letter-spacing: 0.22em;
+    font-size: 0.62rem;
+    letter-spacing: 0.24em;
     text-transform: uppercase;
-    color: var(--smoke);
+    color: var(--steel);
     text-decoration: none;
     transition: color 0.2s;
   }
-  .footer-links a:hover { color: var(--clay); }
+  .footer-links a:hover { color: var(--gold); }
   .footer-copy {
-    margin-top: 3rem;
-    font-size: 0.62rem;
-    letter-spacing: 0.12em;
-    color: rgba(176,164,142,0.45);
+    margin-top: 3.5rem;
+    font-size: 0.58rem;
+    letter-spacing: 0.14em;
+    color: rgba(122,143,166,0.4);
     text-transform: uppercase;
   }
 
   /* ── REVEAL ANIMATION ── */
   .reveal {
     opacity: 0;
-    transform: translateY(28px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
+    transform: translateY(24px);
+    transition: opacity 0.75s ease, transform 0.75s ease;
   }
-  .reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  .reveal-delay-1 { transition-delay: 0.1s; }
-  .reveal-delay-2 { transition-delay: 0.22s; }
-  .reveal-delay-3 { transition-delay: 0.34s; }
-  .reveal-delay-4 { transition-delay: 0.46s; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.08s; }
+  .reveal-delay-2 { transition-delay: 0.18s; }
+  .reveal-delay-3 { transition-delay: 0.28s; }
+  .reveal-delay-4 { transition-delay: 0.38s; }
+  .reveal-delay-5 { transition-delay: 0.48s; }
 
   /* ── MOBILE ── */
   @media (max-width: 768px) {
-    nav { padding: 1rem 1.4rem; }
+    nav { padding: 1rem 1.5rem; }
+    nav.scrolled { padding: 0.8rem 1.5rem; }
     .nav-links { display: none; }
     .hamburger { display: flex; }
 
-    .hero-title { font-size: clamp(2.6rem, 12vw, 4rem); }
-    .hero-text { font-size: 0.82rem; }
+    .hero-content { padding: 0 1.5rem 4rem; }
+    .hero-scroll-hint { right: 1.5rem; }
 
-    .portfolio-section { padding: 4.5rem 0 3.5rem; }
+    .section-inner { padding: 0 1.5rem; }
+    .section-header { grid-template-columns: 1fr; }
 
-    .section-header {
-      grid-template-columns: 1fr;
-    }
-    .section-desc { text-align: left; max-width: 100%; }
-
-    .gallery-1 {
-      grid-template-columns: 1fr;
-      grid-template-rows: 260px 200px 200px;
-    }
-    .gallery-1 .g-tall { grid-row: auto; }
-
-    .gallery-2 {
+    .gallery.count-3,
+    .gallery.count-4,
+    .gallery.count-5,
+    .gallery.count-6,
+    .gallery.count-many {
       grid-template-columns: 1fr 1fr;
-      grid-template-rows: 200px 200px 180px;
+      grid-template-rows: auto;
     }
-    .gallery-2 .g-wide { grid-column: 1 / 3; }
-
-    .gallery-3 {
-      grid-template-columns: 1fr 1fr;
-      grid-template-rows: 200px 200px 200px;
-    }
-    .gallery-3 .g-sq2 {
+    .gallery.count-3 .img-card:first-child,
+    .gallery.count-5 .img-card:first-child {
       grid-column: 1 / 3;
       grid-row: auto;
     }
+    .gallery .img-card { min-height: 200px !important; }
   }
 
   @media (max-width: 480px) {
-    .gallery-2 {
+    .gallery.count-4,
+    .gallery.count-5,
+    .gallery.count-6,
+    .gallery.count-many {
       grid-template-columns: 1fr;
-      grid-template-rows: repeat(3, 200px);
     }
-    .gallery-2 .g-wide { grid-column: 1; }
-    .gallery-3 {
-      grid-template-columns: 1fr;
-      grid-template-rows: repeat(3, 200px);
+    .gallery.count-3 .img-card:first-child,
+    .gallery.count-5 .img-card:first-child {
+      grid-column: 1;
     }
-    .gallery-3 .g-sq2 { grid-column: 1; grid-row: auto; }
   }
 </style>
 </head>
@@ -463,11 +456,11 @@
 
 <!-- NAV -->
 <nav id="main-nav">
-  <a href="#home" class="nav-logo">Mara Voss</a>
+  <a href="#home" class="nav-logo">Katherine LeBlanc</a>
   <ul class="nav-links">
-    <li><a href="#landscapes">Landscapes</a></li>
-    <li><a href="#portraits">Portraits</a></li>
-    <li><a href="#still-life">Still Life</a></li>
+    <li><a href="#section-1">Landscapes</a></li>
+    <li><a href="#section-2">Portraits</a></li>
+    <li><a href="#section-3">Still Life</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
   <div class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
@@ -477,9 +470,9 @@
 
 <!-- MOBILE MENU -->
 <div class="mobile-menu" id="mobile-menu">
-  <a href="#landscapes" onclick="toggleMenu()">Landscapes</a>
-  <a href="#portraits" onclick="toggleMenu()">Portraits</a>
-  <a href="#still-life" onclick="toggleMenu()">Still Life</a>
+  <a href="#section-1" onclick="toggleMenu()">Landscapes</a>
+  <a href="#section-2" onclick="toggleMenu()">Portraits</a>
+  <a href="#section-3" onclick="toggleMenu()">Still Life</a>
   <a href="#contact" onclick="toggleMenu()">Contact</a>
 </div>
 
@@ -488,201 +481,161 @@
   <div class="hero-bg" id="hero-bg"></div>
   <div class="hero-overlay"></div>
   <div class="hero-content">
-    <p class="hero-eyebrow" id="hero-eyebrow">Fine Art Photography &amp; Mixed Media</p>
-    <h1 class="hero-title">Mara <em>Voss</em></h1>
+    <p class="hero-eyebrow" id="hero-eyebrow">Lorem ipsum dolor sit amet</p>
+    <h1 class="hero-title">Katherine <em>LeBlanc</em></h1>
     <p class="hero-text" id="hero-bio">
-      I work in the space between memory and material — collecting light, texture, and
-      time into images that ask to be held rather than scrolled past. Each series is a
-      slow conversation with a place, a person, or an ordinary object made strange by
-      sustained attention.
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor
+      incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+      exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
     </p>
-    <div class="hero-scroll-hint">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-        <path d="M12 5v14M5 12l7 7 7-7"/>
-      </svg>
-      <span>Explore</span>
-    </div>
+  </div>
+  <div class="hero-scroll-hint">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+      <path d="M12 5v14M5 12l7 7 7-7"/>
+    </svg>
+    <span>Scroll</span>
   </div>
 </section>
 
 <!-- SECTION 1: LANDSCAPES -->
-<section class="portfolio-section" id="landscapes">
+<section class="portfolio-section" id="section-1">
   <div class="section-inner">
-    <div class="section-header">
+    <div class="section-header reveal">
       <div>
         <p class="section-number">01 / Landscapes</p>
-        <div class="divider"></div>
-        <h2 class="section-title" id="landscapes-title">The <em>Quiet</em> Earth</h2>
+        <h2 class="section-title" id="s1-title">Lorem <em>Ipsum</em></h2>
       </div>
-      <p class="section-desc" id="landscapes-desc">
-        Expansive terrain captured at the edge of day — dusk light flattening colour
-        into something ancient, almost geological.
+      <p class="section-desc" id="s1-desc">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+        incididunt ut labore et dolore magna aliqua ut enim.
       </p>
     </div>
-
-    <div class="gallery-1" id="gallery-landscapes">
-      <div class="img-card g-tall reveal reveal-delay-1" style="min-height:460px;">
-        <img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=800&auto=format&fit=crop&q=75" alt="Wide landscape at dusk">
-        <div class="caption">
-          <p class="caption-title">Ochre Flats, August</p>
-          <p class="caption-meta">Archival pigment — 90 × 120 cm</p>
-        </div>
-      </div>
-      <div class="img-card reveal reveal-delay-2" style="min-height:220px;">
-        <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=700&auto=format&fit=crop&q=75" alt="Mountain silhouette">
-        <div class="caption">
-          <p class="caption-title">Ridge, Pre-dawn</p>
-          <p class="caption-meta">Archival pigment — 60 × 80 cm</p>
-        </div>
-      </div>
-      <div class="img-card reveal reveal-delay-3" style="min-height:220px;">
-        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=700&auto=format&fit=crop&q=75" alt="Desert plains">
-        <div class="caption">
-          <p class="caption-title">Salt Plain, Noon</p>
-          <p class="caption-meta">Archival pigment — 60 × 80 cm</p>
-        </div>
-      </div>
+    <div class="gallery" id="gallery-1">
+      <!-- Populated by Sanity or placeholder below -->
     </div>
   </div>
 </section>
 
 <!-- SECTION 2: PORTRAITS -->
-<section class="portfolio-section" id="portraits">
+<section class="portfolio-section" id="section-2">
   <div class="section-inner">
-    <div class="section-header">
+    <div class="section-header reveal">
       <div>
         <p class="section-number">02 / Portraits</p>
-        <div class="divider"></div>
-        <h2 class="section-title" id="portraits-title"><em>Presence</em> &amp; Grain</h2>
+        <h2 class="section-title" id="s2-title"><em>Dolor</em> Sit Amet</h2>
       </div>
-      <p class="section-desc" id="portraits-desc">
-        Shot on medium format film. Faces rendered at the threshold of
-        recognition — familiar and withheld at once.
+      <p class="section-desc" id="s2-desc">
+        Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+        dolore magna aliqua. Quis nostrud exercitation ullamco.
       </p>
     </div>
-
-    <div class="gallery-2" id="gallery-portraits">
-      <div class="img-card g-wide reveal reveal-delay-1">
-        <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=1000&auto=format&fit=crop&q=75" alt="Portrait study wide">
-        <div class="caption">
-          <p class="caption-title">Study in Sienna, No. 4</p>
-          <p class="caption-meta">Silver gelatin — 80 × 60 cm</p>
-        </div>
-      </div>
-      <div class="img-card reveal reveal-delay-2">
-        <img src="https://images.unsplash.com/photo-1601455763557-db1bea8a9a5a?w=500&auto=format&fit=crop&q=75" alt="Close portrait">
-        <div class="caption">
-          <p class="caption-title">Elena</p>
-          <p class="caption-meta">Silver gelatin — 40 × 50 cm</p>
-        </div>
-      </div>
-      <div class="img-card reveal reveal-delay-2" style="grid-column:1; grid-row:2;">
-        <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=500&auto=format&fit=crop&q=75" alt="Male portrait">
-        <div class="caption">
-          <p class="caption-title">The Cartographer</p>
-          <p class="caption-meta">Silver gelatin — 40 × 50 cm</p>
-        </div>
-      </div>
-      <div class="img-card reveal reveal-delay-3">
-        <img src="https://images.unsplash.com/photo-1502685104226-ee32379fefbe?w=500&auto=format&fit=crop&q=75" alt="Portrait with fabric">
-        <div class="caption">
-          <p class="caption-title">Linen, Afternoon</p>
-          <p class="caption-meta">Silver gelatin — 40 × 50 cm</p>
-        </div>
-      </div>
+    <div class="gallery" id="gallery-2">
     </div>
   </div>
 </section>
 
 <!-- SECTION 3: STILL LIFE -->
-<section class="portfolio-section" id="still-life">
+<section class="portfolio-section" id="section-3">
   <div class="section-inner">
-    <div class="section-header">
+    <div class="section-header reveal">
       <div>
         <p class="section-number">03 / Still Life</p>
-        <div class="divider"></div>
-        <h2 class="section-title" id="stilllife-title">Objects <em>at Rest</em></h2>
+        <h2 class="section-title" id="s3-title">Magna <em>Aliqua</em></h2>
       </div>
-      <p class="section-desc" id="stilllife-desc">
-        Gathered from flea markets, shorelines, and kitchen tables — each object
-        carrying a weight beyond its use.
+      <p class="section-desc" id="s3-desc">
+        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+        aliquip ex ea commodo consequat duis aute irure.
       </p>
     </div>
-
-    <div class="gallery-3" id="gallery-stilllife">
-      <div class="img-card reveal reveal-delay-1" style="min-height:220px;">
-        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=500&auto=format&fit=crop&q=75" alt="Ceramics still life">
-        <div class="caption">
-          <p class="caption-title">Three Vessels</p>
-          <p class="caption-meta">Archival pigment — 50 × 50 cm</p>
-        </div>
-      </div>
-      <div class="img-card g-sq2 reveal reveal-delay-2">
-        <img src="https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=800&auto=format&fit=crop&q=75" alt="Table composition large">
-        <div class="caption">
-          <p class="caption-title">Table with Cloth and Pears</p>
-          <p class="caption-meta">Archival pigment — 100 × 80 cm</p>
-        </div>
-      </div>
-      <div class="img-card reveal reveal-delay-3" style="min-height:220px;">
-        <img src="https://images.unsplash.com/photo-1540932239986-30128078f3c5?w=500&auto=format&fit=crop&q=75" alt="Dried flowers still life">
-        <div class="caption">
-          <p class="caption-title">Dried, December</p>
-          <p class="caption-meta">Archival pigment — 50 × 70 cm</p>
-        </div>
-      </div>
+    <div class="gallery" id="gallery-3">
     </div>
   </div>
 </section>
 
-<!-- FOOTER / CONTACT -->
+<!-- FOOTER -->
 <footer id="contact">
-  <p class="footer-logo">Mara Voss</p>
-  <p id="footer-tagline">Available for commissions, exhibitions &amp; editorial work</p>
+  <p class="footer-logo">Katherine LeBlanc</p>
+  <p class="footer-tagline" id="footer-tagline">Lorem ipsum dolor sit amet consectetur</p>
   <ul class="footer-links">
     <li><a href="#" id="footer-instagram">Instagram</a></li>
     <li><a href="#" id="footer-email">Email</a></li>
     <li><a href="#" id="footer-press">Press</a></li>
     <li><a href="#" id="footer-shop">Shop Prints</a></li>
   </ul>
-  <p class="footer-copy">&copy; 2026 Mara Voss. All rights reserved.</p>
+  <p class="footer-copy">&copy; 2026 Katherine LeBlanc. All rights reserved.</p>
 </footer>
 
 <script>
   // ─────────────────────────────────────────────────────────
-  //  SANITY CONFIG
-  //  Replace these two values with your own project details.
-  //  Find them at: https://www.sanity.io/manage
+  //  SANITY CONFIG — replace with your real project ID
+  //  Find it at: https://www.sanity.io/manage
   // ─────────────────────────────────────────────────────────
-  const SANITY_PROJECT_ID = 'x7fylnll';   // e.g. 'abc12def'
-  const SANITY_DATASET    = 'production';         // usually 'production'
+  const SANITY_PROJECT_ID = 'x7fylnll';
+  const SANITY_DATASET    = 'production';
 
-  // Builds a Sanity image URL from a Sanity image asset reference
+  // ── Image URL builder ──
   function sanityImageUrl(source, width = 1200) {
     if (!source?.asset?._ref) return null;
     const ref = source.asset._ref;
-    // ref format: image-{id}-{dimensions}-{extension}
-    const [, id, dimensions, ext] = ref.split('-');
-    return `https://cdn.sanity.io/images/${SANITY_PROJECT_ID}/${SANITY_DATASET}/${id}-${dimensions}.${ext}?w=${width}&auto=format&fit=crop&q=80`;
+    const parts = ref.split('-');
+    // format: image-{id}-{dimensions}-{ext}
+    const ext  = parts[parts.length - 1];
+    const dims = parts[parts.length - 2];
+    const id   = parts.slice(1, parts.length - 2).join('-');
+    return `https://cdn.sanity.io/images/${SANITY_PROJECT_ID}/${SANITY_DATASET}/${id}-${dims}.${ext}?w=${width}&auto=format&fit=crop&q=82`;
   }
 
-  // Builds a gallery img-card HTML string
-  function buildCard(img, classes = '', style = '') {
-    const url  = sanityImageUrl(img.image, 900);
-    const src  = url || '';
-    return `
-      <div class="img-card ${classes} reveal reveal-delay-1" ${style ? `style="${style}"` : ''}>
-        <img src="${src}" alt="${img.captionTitle || ''}">
-        <div class="caption">
-          <p class="caption-title">${img.captionTitle || ''}</p>
-          <p class="caption-meta">${img.captionMeta || ''}</p>
-        </div>
-      </div>`;
+  // ── Dynamic gallery builder ──
+  // Applies the right CSS class based on image count so layout
+  // shifts automatically — no manual intervention needed.
+  function buildGallery(containerId, images) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+
+    const count = images.length;
+    if (count === 0) return;
+
+    // Set layout class
+    const countClass = count >= 6 ? 'count-many' : `count-${count}`;
+    container.className = `gallery ${countClass}`;
+
+    // Build cards
+    container.innerHTML = images.map((img, i) => {
+      const url   = sanityImageUrl(img.image, 1000) || '';
+      const delay = `reveal-delay-${Math.min(i + 1, 5)}`;
+      return `
+        <div class="img-card reveal ${delay}">
+          <img src="${url}" alt="${img.captionTitle || ''}">
+          <div class="caption">
+            <p class="caption-title">${img.captionTitle || ''}</p>
+            <p class="caption-meta">${img.captionMeta || ''}</p>
+          </div>
+        </div>`;
+    }).join('');
+
+    // Observe the new cards for reveal animation
+    container.querySelectorAll('.reveal').forEach(el => observer.observe(el));
   }
 
-  // ─────────────────────────────────────────────────────────
-  //  FETCH & RENDER
-  // ─────────────────────────────────────────────────────────
+  // ── Placeholder gallery (shown before Sanity loads) ──
+  // Shows empty colored blocks so the layout isn't jarring on first load
+  function buildPlaceholderGallery(containerId, count) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+    const countClass = count >= 6 ? 'count-many' : `count-${count}`;
+    container.className = `gallery ${countClass}`;
+    container.innerHTML = Array(count).fill(0).map((_, i) =>
+      `<div class="img-card placeholder reveal reveal-delay-${Math.min(i+1,5)}"></div>`
+    ).join('');
+    container.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  }
+
+  // Show placeholders immediately while Sanity loads
+  buildPlaceholderGallery('gallery-1', 3);
+  buildPlaceholderGallery('gallery-2', 4);
+  buildPlaceholderGallery('gallery-3', 3);
+
+  // ── Fetch & render from Sanity ──
   async function loadContent() {
     const query = encodeURIComponent(`*[_type == "maraVoss"][0]`);
     const url   = `https://${SANITY_PROJECT_ID}.api.sanity.io/v2021-10-21/data/query/${SANITY_DATASET}?query=${query}`;
@@ -692,122 +645,75 @@
       const res = await fetch(url);
       data = (await res.json()).result;
     } catch (err) {
-      console.warn('Sanity fetch failed — showing fallback content.', err);
-      return; // Leave hardcoded HTML in place as fallback
+      console.warn('Sanity fetch failed — showing lorem ipsum placeholders.', err);
+      return;
     }
 
     if (!data) return;
 
-    // ── Hero ──
+    // Hero
     if (data.heroSection) {
       const h = data.heroSection;
       if (h.eyebrow) document.getElementById('hero-eyebrow').textContent = h.eyebrow;
       if (h.bio)     document.getElementById('hero-bio').textContent = h.bio;
     }
 
-    // ── Landscapes ──
+    // Section 1
     if (data.landscapes) {
       const s = data.landscapes;
-      if (s.sectionTitle) document.getElementById('landscapes-title').innerHTML = s.sectionTitle;
-      if (s.sectionDesc)  document.getElementById('landscapes-desc').textContent = s.sectionDesc;
-      if (s.images?.length) {
-        const [a, b, c] = s.images;
-        let html = '';
-        if (a) html += buildCard(a, 'g-tall', 'min-height:460px');
-        if (b) html += buildCard(b, '',        'min-height:220px');
-        if (c) html += buildCard(c, '',        'min-height:220px');
-        document.getElementById('gallery-landscapes').innerHTML = html;
-      }
+      if (s.sectionTitle) document.getElementById('s1-title').innerHTML = s.sectionTitle;
+      if (s.sectionDesc)  document.getElementById('s1-desc').textContent = s.sectionDesc;
+      if (s.images?.length) buildGallery('gallery-1', s.images);
     }
 
-    // ── Portraits ──
+    // Section 2
     if (data.portraits) {
       const s = data.portraits;
-      if (s.sectionTitle) document.getElementById('portraits-title').innerHTML = s.sectionTitle;
-      if (s.sectionDesc)  document.getElementById('portraits-desc').textContent = s.sectionDesc;
-      if (s.images?.length) {
-        const [a, b, c, d] = s.images;
-        let html = '';
-        if (a) html += buildCard(a, 'g-wide');
-        if (b) html += buildCard(b);
-        if (c) html += buildCard(c, '', 'grid-column:1; grid-row:2;');
-        if (d) html += buildCard(d);
-        document.getElementById('gallery-portraits').innerHTML = html;
-      }
+      if (s.sectionTitle) document.getElementById('s2-title').innerHTML = s.sectionTitle;
+      if (s.sectionDesc)  document.getElementById('s2-desc').textContent = s.sectionDesc;
+      if (s.images?.length) buildGallery('gallery-2', s.images);
     }
 
-    // ── Still Life ──
+    // Section 3
     if (data.stillLife) {
       const s = data.stillLife;
-      if (s.sectionTitle) document.getElementById('stilllife-title').innerHTML = s.sectionTitle;
-      if (s.sectionDesc)  document.getElementById('stilllife-desc').textContent = s.sectionDesc;
-      if (s.images?.length) {
-        const [a, b, c] = s.images;
-        let html = '';
-        if (a) html += buildCard(a, '',      'min-height:220px');
-        if (b) html += buildCard(b, 'g-sq2');
-        if (c) html += buildCard(c, '',      'min-height:220px');
-        document.getElementById('gallery-stilllife').innerHTML = html;
-      }
+      if (s.sectionTitle) document.getElementById('s3-title').innerHTML = s.sectionTitle;
+      if (s.sectionDesc)  document.getElementById('s3-desc').textContent = s.sectionDesc;
+      if (s.images?.length) buildGallery('gallery-3', s.images);
     }
 
-    // ── Footer ──
+    // Footer
     if (data.footer) {
       const f = data.footer;
       if (f.tagline)      document.getElementById('footer-tagline').textContent = f.tagline;
       if (f.instagramUrl) document.getElementById('footer-instagram').href = f.instagramUrl;
-      if (f.emailAddress) {
-        const el = document.getElementById('footer-email');
-        el.href = `mailto:${f.emailAddress}`;
-      }
-      if (f.pressUrl) document.getElementById('footer-press').href = f.pressUrl;
-      if (f.shopUrl)  document.getElementById('footer-shop').href  = f.shopUrl;
+      if (f.emailAddress) document.getElementById('footer-email').href = `mailto:${f.emailAddress}`;
+      if (f.pressUrl)     document.getElementById('footer-press').href = f.pressUrl;
+      if (f.shopUrl)      document.getElementById('footer-shop').href  = f.shopUrl;
     }
-
-    // Re-observe any newly injected reveal elements
-    document.querySelectorAll('.reveal:not(.visible)').forEach(r => observer.observe(r));
   }
 
-  // ─────────────────────────────────────────────────────────
-  //  UI INTERACTIONS (unchanged from original)
-  // ─────────────────────────────────────────────────────────
-
-  /* ── NAV scroll ── */
+  // ── NAV scroll ──
   const nav = document.getElementById('main-nav');
   window.addEventListener('scroll', () => {
     nav.classList.toggle('scrolled', window.scrollY > 60);
   }, { passive: true });
 
-  /* ── Mobile menu ── */
+  // ── Mobile menu ──
   function toggleMenu() {
-    const m = document.getElementById('mobile-menu');
-    const h = document.getElementById('hamburger');
-    m.classList.toggle('open');
-    h.classList.toggle('open');
+    document.getElementById('mobile-menu').classList.toggle('open');
+    document.getElementById('hamburger').classList.toggle('open');
   }
 
-  /* ── Hero parallax ── */
+  // ── Hero parallax ──
   const heroBg = document.getElementById('hero-bg');
-  function onScroll() {
-    const sy = window.scrollY;
-    if (sy < window.innerHeight * 1.2) {
-      heroBg.style.transform = `translateY(${sy * 0.35}px)`;
+  window.addEventListener('scroll', () => {
+    if (window.scrollY < window.innerHeight * 1.2) {
+      heroBg.style.transform = `translateY(${window.scrollY * 0.32}px)`;
     }
-    parallaxBgs.forEach(({ el, speed }) => {
-      const rect = el.parentElement.getBoundingClientRect();
-      const mid  = rect.top + rect.height / 2 - window.innerHeight / 2;
-      el.style.transform = `translateY(${mid * speed}px)`;
-    });
-  }
+  }, { passive: true });
 
-  const parallaxBgs = [];
-  document.querySelectorAll('.section-parallax-bg').forEach(el => {
-    parallaxBgs.push({ el, speed: 0.08 });
-  });
-  window.addEventListener('scroll', onScroll, { passive: true });
-
-  /* ── Reveal on scroll ── */
-  const reveals = document.querySelectorAll('.reveal');
+  // ── Reveal on scroll ──
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(e => {
       if (e.isIntersecting) {
@@ -815,10 +721,11 @@
         observer.unobserve(e.target);
       }
     });
-  }, { threshold: 0.12 });
-  reveals.forEach(r => observer.observe(r));
+  }, { threshold: 0.1 });
 
-  // Load Sanity content on page ready
+  document.querySelectorAll('.reveal').forEach(r => observer.observe(r));
+
+  // Kick off Sanity fetch
   loadContent();
 </script>
 </body>
