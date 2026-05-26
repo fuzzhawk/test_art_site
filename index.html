@@ -4,6 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Mara Voss — Artist Portfolio</title>
+<!-- ─────────────────────────────────────────
+     SANITY CONFIG — swap these two values in
+     once your project is set up
+───────────────────────────────────────────── -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@200;300;400&display=swap" rel="stylesheet">
 <style>
@@ -484,9 +488,9 @@
   <div class="hero-bg" id="hero-bg"></div>
   <div class="hero-overlay"></div>
   <div class="hero-content">
-    <p class="hero-eyebrow">Fine Art Photography &amp; Mixed Media</p>
+    <p class="hero-eyebrow" id="hero-eyebrow">Fine Art Photography &amp; Mixed Media</p>
     <h1 class="hero-title">Mara <em>Voss</em></h1>
-    <p class="hero-text">
+    <p class="hero-text" id="hero-bio">
       I work in the space between memory and material — collecting light, texture, and
       time into images that ask to be held rather than scrolled past. Each series is a
       slow conversation with a place, a person, or an ordinary object made strange by
@@ -508,15 +512,15 @@
       <div>
         <p class="section-number">01 / Landscapes</p>
         <div class="divider"></div>
-        <h2 class="section-title">The <em>Quiet</em> Earth</h2>
+        <h2 class="section-title" id="landscapes-title">The <em>Quiet</em> Earth</h2>
       </div>
-      <p class="section-desc">
+      <p class="section-desc" id="landscapes-desc">
         Expansive terrain captured at the edge of day — dusk light flattening colour
         into something ancient, almost geological.
       </p>
     </div>
 
-    <div class="gallery-1">
+    <div class="gallery-1" id="gallery-landscapes">
       <div class="img-card g-tall reveal reveal-delay-1" style="min-height:460px;">
         <img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=800&auto=format&fit=crop&q=75" alt="Wide landscape at dusk">
         <div class="caption">
@@ -549,15 +553,15 @@
       <div>
         <p class="section-number">02 / Portraits</p>
         <div class="divider"></div>
-        <h2 class="section-title"><em>Presence</em> &amp; Grain</h2>
+        <h2 class="section-title" id="portraits-title"><em>Presence</em> &amp; Grain</h2>
       </div>
-      <p class="section-desc">
+      <p class="section-desc" id="portraits-desc">
         Shot on medium format film. Faces rendered at the threshold of
         recognition — familiar and withheld at once.
       </p>
     </div>
 
-    <div class="gallery-2">
+    <div class="gallery-2" id="gallery-portraits">
       <div class="img-card g-wide reveal reveal-delay-1">
         <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=1000&auto=format&fit=crop&q=75" alt="Portrait study wide">
         <div class="caption">
@@ -597,15 +601,15 @@
       <div>
         <p class="section-number">03 / Still Life</p>
         <div class="divider"></div>
-        <h2 class="section-title">Objects <em>at Rest</em></h2>
+        <h2 class="section-title" id="stilllife-title">Objects <em>at Rest</em></h2>
       </div>
-      <p class="section-desc">
+      <p class="section-desc" id="stilllife-desc">
         Gathered from flea markets, shorelines, and kitchen tables — each object
         carrying a weight beyond its use.
       </p>
     </div>
 
-    <div class="gallery-3">
+    <div class="gallery-3" id="gallery-stilllife">
       <div class="img-card reveal reveal-delay-1" style="min-height:220px;">
         <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=500&auto=format&fit=crop&q=75" alt="Ceramics still life">
         <div class="caption">
@@ -634,17 +638,140 @@
 <!-- FOOTER / CONTACT -->
 <footer id="contact">
   <p class="footer-logo">Mara Voss</p>
-  <p>Available for commissions, exhibitions &amp; editorial work</p>
+  <p id="footer-tagline">Available for commissions, exhibitions &amp; editorial work</p>
   <ul class="footer-links">
-    <li><a href="#">Instagram</a></li>
-    <li><a href="#">Email</a></li>
-    <li><a href="#">Press</a></li>
-    <li><a href="#">Shop Prints</a></li>
+    <li><a href="#" id="footer-instagram">Instagram</a></li>
+    <li><a href="#" id="footer-email">Email</a></li>
+    <li><a href="#" id="footer-press">Press</a></li>
+    <li><a href="#" id="footer-shop">Shop Prints</a></li>
   </ul>
   <p class="footer-copy">&copy; 2026 Mara Voss. All rights reserved.</p>
 </footer>
 
 <script>
+  // ─────────────────────────────────────────────────────────
+  //  SANITY CONFIG
+  //  Replace these two values with your own project details.
+  //  Find them at: https://www.sanity.io/manage
+  // ─────────────────────────────────────────────────────────
+  const SANITY_PROJECT_ID = 'YOUR_PROJECT_ID';   // e.g. 'abc12def'
+  const SANITY_DATASET    = 'production';         // usually 'production'
+
+  // Builds a Sanity image URL from a Sanity image asset reference
+  function sanityImageUrl(source, width = 1200) {
+    if (!source?.asset?._ref) return null;
+    const ref = source.asset._ref;
+    // ref format: image-{id}-{dimensions}-{extension}
+    const [, id, dimensions, ext] = ref.split('-');
+    return `https://cdn.sanity.io/images/${SANITY_PROJECT_ID}/${SANITY_DATASET}/${id}-${dimensions}.${ext}?w=${width}&auto=format&fit=crop&q=80`;
+  }
+
+  // Builds a gallery img-card HTML string
+  function buildCard(img, classes = '', style = '') {
+    const url  = sanityImageUrl(img.image, 900);
+    const src  = url || '';
+    return `
+      <div class="img-card ${classes} reveal reveal-delay-1" ${style ? `style="${style}"` : ''}>
+        <img src="${src}" alt="${img.captionTitle || ''}">
+        <div class="caption">
+          <p class="caption-title">${img.captionTitle || ''}</p>
+          <p class="caption-meta">${img.captionMeta || ''}</p>
+        </div>
+      </div>`;
+  }
+
+  // ─────────────────────────────────────────────────────────
+  //  FETCH & RENDER
+  // ─────────────────────────────────────────────────────────
+  async function loadContent() {
+    const query = encodeURIComponent(`*[_type == "maraVoss"][0]`);
+    const url   = `https://${SANITY_PROJECT_ID}.api.sanity.io/v2021-10-21/data/query/${SANITY_DATASET}?query=${query}`;
+
+    let data;
+    try {
+      const res = await fetch(url);
+      data = (await res.json()).result;
+    } catch (err) {
+      console.warn('Sanity fetch failed — showing fallback content.', err);
+      return; // Leave hardcoded HTML in place as fallback
+    }
+
+    if (!data) return;
+
+    // ── Hero ──
+    if (data.heroSection) {
+      const h = data.heroSection;
+      if (h.eyebrow) document.getElementById('hero-eyebrow').textContent = h.eyebrow;
+      if (h.bio)     document.getElementById('hero-bio').textContent = h.bio;
+    }
+
+    // ── Landscapes ──
+    if (data.landscapes) {
+      const s = data.landscapes;
+      if (s.sectionTitle) document.getElementById('landscapes-title').innerHTML = s.sectionTitle;
+      if (s.sectionDesc)  document.getElementById('landscapes-desc').textContent = s.sectionDesc;
+      if (s.images?.length) {
+        const [a, b, c] = s.images;
+        let html = '';
+        if (a) html += buildCard(a, 'g-tall', 'min-height:460px');
+        if (b) html += buildCard(b, '',        'min-height:220px');
+        if (c) html += buildCard(c, '',        'min-height:220px');
+        document.getElementById('gallery-landscapes').innerHTML = html;
+      }
+    }
+
+    // ── Portraits ──
+    if (data.portraits) {
+      const s = data.portraits;
+      if (s.sectionTitle) document.getElementById('portraits-title').innerHTML = s.sectionTitle;
+      if (s.sectionDesc)  document.getElementById('portraits-desc').textContent = s.sectionDesc;
+      if (s.images?.length) {
+        const [a, b, c, d] = s.images;
+        let html = '';
+        if (a) html += buildCard(a, 'g-wide');
+        if (b) html += buildCard(b);
+        if (c) html += buildCard(c, '', 'grid-column:1; grid-row:2;');
+        if (d) html += buildCard(d);
+        document.getElementById('gallery-portraits').innerHTML = html;
+      }
+    }
+
+    // ── Still Life ──
+    if (data.stillLife) {
+      const s = data.stillLife;
+      if (s.sectionTitle) document.getElementById('stilllife-title').innerHTML = s.sectionTitle;
+      if (s.sectionDesc)  document.getElementById('stilllife-desc').textContent = s.sectionDesc;
+      if (s.images?.length) {
+        const [a, b, c] = s.images;
+        let html = '';
+        if (a) html += buildCard(a, '',      'min-height:220px');
+        if (b) html += buildCard(b, 'g-sq2');
+        if (c) html += buildCard(c, '',      'min-height:220px');
+        document.getElementById('gallery-stilllife').innerHTML = html;
+      }
+    }
+
+    // ── Footer ──
+    if (data.footer) {
+      const f = data.footer;
+      if (f.tagline)      document.getElementById('footer-tagline').textContent = f.tagline;
+      if (f.instagramUrl) document.getElementById('footer-instagram').href = f.instagramUrl;
+      if (f.emailAddress) {
+        const el = document.getElementById('footer-email');
+        el.href = `mailto:${f.emailAddress}`;
+      }
+      if (f.pressUrl) document.getElementById('footer-press').href = f.pressUrl;
+      if (f.shopUrl)  document.getElementById('footer-shop').href  = f.shopUrl;
+    }
+
+    // Re-observe any newly injected reveal elements
+    document.querySelectorAll('.reveal:not(.visible)').forEach(r => observer.observe(r));
+  }
+
+  // ─────────────────────────────────────────────────────────
+  //  UI INTERACTIONS (unchanged from original)
+  // ─────────────────────────────────────────────────────────
+
   /* ── NAV scroll ── */
   const nav = document.getElementById('main-nav');
   window.addEventListener('scroll', () => {
@@ -666,21 +793,17 @@
     if (sy < window.innerHeight * 1.2) {
       heroBg.style.transform = `translateY(${sy * 0.35}px)`;
     }
-
-    /* section bg parallax */
     parallaxBgs.forEach(({ el, speed }) => {
       const rect = el.parentElement.getBoundingClientRect();
-      const mid = rect.top + rect.height / 2 - window.innerHeight / 2;
+      const mid  = rect.top + rect.height / 2 - window.innerHeight / 2;
       el.style.transform = `translateY(${mid * speed}px)`;
     });
   }
 
-  /* ── Section parallax decorators ── */
   const parallaxBgs = [];
   document.querySelectorAll('.section-parallax-bg').forEach(el => {
     parallaxBgs.push({ el, speed: 0.08 });
   });
-
   window.addEventListener('scroll', onScroll, { passive: true });
 
   /* ── Reveal on scroll ── */
@@ -694,6 +817,9 @@
     });
   }, { threshold: 0.12 });
   reveals.forEach(r => observer.observe(r));
+
+  // Load Sanity content on page ready
+  loadContent();
 </script>
 </body>
 </html>
